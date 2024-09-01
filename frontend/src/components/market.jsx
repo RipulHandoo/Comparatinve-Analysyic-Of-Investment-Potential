@@ -1,12 +1,10 @@
 import React from 'react'
-import Header from './Header'
-
 
 const Market = () => {
   return (
-    <>
-       <Header /> 
-    </>
+    <div>
+        Here we will display the top gainer and losers
+    </div>
   )
 }
 

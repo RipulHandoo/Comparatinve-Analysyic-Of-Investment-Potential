@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Register from './components/Register';
 import Login from './components/Login';
 import Stocks from './components/stocks';
+import MutualFund from './components/mutualFund';
 import Market from './components/market';
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
       <Route path='/login' element= {<Login />}></Route>
       <Route path='/search' element = { <Stocks />} ></Route>
       <Route path='/stocks' element = { <Stocks />} ></Route>
-      <Route path='/market' element = { < Market /> }></Route>
+      <Route path='market' element = { < Market />} ></Route>
+      <Route path='/mutual-fund' element = { < MutualFund /> }></Route>
     </Routes>
     </BrowserRouter>
   );
