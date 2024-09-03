@@ -5,6 +5,7 @@ const router = require("./routes/test")
 const searchRouter = require("./routes/searchResult")
 const userRouter = require("./routes/user")
 const marketRouter = require("./routes/market")
+const infoRouter = require("./routes/stockInfo")
 const bodyParser = require("body-parser");
 
 app.use(cors())
@@ -14,6 +15,7 @@ app.use(router)
 app.use(userRouter)
 app.use(searchRouter)
 app.use(marketRouter)
+app.use(infoRouter) // This route is being used to get the stock related information, that will be displayed on the frontend
 
 app.listen(3000, () => {
     console.log(`Server is running on PORT ${3000}`);
