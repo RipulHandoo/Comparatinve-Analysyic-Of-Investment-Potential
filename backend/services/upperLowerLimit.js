@@ -8,7 +8,7 @@ async function UpperLowerLimit(req, res) {
     const url = process.env.upper_lower_limit + `${scripcode}`;
 
     // Debugging
-    console.log(url)
+    // console.log(url)
     const headers = {
         'Accept': 'application/json, text/plain, */*',
         'Accept-Encoding': 'gzip, deflate, br, zstd',
