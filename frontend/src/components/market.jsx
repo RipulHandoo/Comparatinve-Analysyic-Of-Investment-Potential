@@ -41,22 +41,28 @@ const Market = () => {
     setTopGainer(true);
     setCurrCategory("Top Gainer");
     setTopLoser(false);
-    console.log(currCategory)
-    setResult([])
+    console.log(currCategory);
+    setResult([]);
     setCurrentPage(1); // Reset to the first page
   };
 
   const handleClickLoser = () => {
     setTopGainer(false);
     setCurrCategory("Top Loser");
-    console.log(currCategory)
+    console.log(currCategory);
     setTopLoser(true);
-    setResult([])
+    setResult([]);
     setCurrentPage(1); // Reset to the first page
   };
 
   const handleClick = (result) => {
-    navigate(`/stock/${result.scrip_cd}`);
+    navigate(`/stock/${result.scrip_cd}`, {
+      state: {
+        scripname: result.scripname,
+        long_name: result.LONG_NAME,
+        stockID: result.scrip_cd,
+      },
+    });
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -79,7 +85,10 @@ const Market = () => {
             >
               <h1>Top Gainer</h1>
             </div>
-            <div className={topLoser ? "active" : ""} onClick={handleClickLoser}>
+            <div
+              className={topLoser ? "active" : ""}
+              onClick={handleClickLoser}
+            >
               <h1>Top Loser</h1>
             </div>
           </div>
@@ -103,8 +112,8 @@ const Market = () => {
                 <div className="table-row-company">{item.LONG_NAME}</div>
                 <div className="table-row-price">
                   <div>
-                  <h1>{`₹${item.ltradert}`}</h1>
-                  <h2>{`₹${item.change_percent}`}</h2>
+                    <h1>{`₹${item.ltradert}`}</h1>
+                    <h2>{`₹${item.change_percent}`}</h2>
                   </div>
                 </div>
                 <div className="table-row-open-rate">{item.openrate}</div>
