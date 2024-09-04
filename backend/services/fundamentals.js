@@ -7,7 +7,7 @@ async function GetFundamentals(req, res) {
     // console.log("Received Scripcode:", scripcode); // Debugging
 
     const url = process.env.fundamentals_url + `&scripcode=${scripcode}&seriesid=`;
-    console.log(url);
+    // console.log(url);
 
     const headers = {
         'Accept': 'application/json, text/plain, */*',

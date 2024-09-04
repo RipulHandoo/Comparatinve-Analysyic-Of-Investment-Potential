@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Stocks from './components/stocks';
 import MutualFund from './components/mutualFund';
 import Market from './components/market';
+import StockInfo from './components/stockInfo';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
       <Route path='/stocks' element = { <Stocks />} ></Route>
       <Route path='market' element = { < Market />} ></Route>
       <Route path='/mutual-fund' element = { < MutualFund /> }></Route>
+      {/* <Route path='/stock/:stock-name/:stock-id' element= { < StockInfo />}></Route> */}
+      <Route path='/stock/:stock_id' element= { < StockInfo />}></Route>
     </Routes>
     </BrowserRouter>
   );
