@@ -2,7 +2,7 @@
     margin-top: 100px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
 }
 
@@ -30,26 +30,42 @@
 .timeline-button span.active {
     background-color: #6af6ce;
 }
+
+
 .stock-info-by-script {
-    margin-top: 60px;
-    margin-left: 28px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    background-color: pink;
+    width: 700px;
+    height: 500px;
+  }
+  
+  .stock-card {
+    background-color: #f9f9f9;
     padding: 20px;
-    color: white;
-    /* width: 40%;
-    height: 400px; */
-}
-
-.stock-by-script{
-    margin-bottom: 90px;
-    background-color: yellow;
-    color: black; /* This is useless just to work with the div  had to remove this and the background color if not nedded in future */
-
-    height: 400px;
-    width: 460px;
-}
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .stock-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  
+  .stock-label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .stock-value {
+    color: #555;
+  }
+  
 
 .stock-info-graph-details {
     margin-top: 60px;

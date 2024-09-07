@@ -37,6 +37,15 @@ const StockInfo = () => {
   const [time, setTime] = useState("5d");
   const [stockData, setStockData] = useState([]);
   const [Sector, setSector] = useState("");
+  const [WAP, setWAP] = useState('');
+  const [Turnover, setTurnover] = useState('');
+  const [TurnoverIn, setTurnoverIn] = useState('');
+  const [TTQ, setTTQ] = useState('');
+  const [TTQin, setTTQin] = useState('');
+  const [TwoWkAvgQty, setTwoWkAvgQty] = useState('');
+  const [CktLimit, setCktLimit] = useState('');
+  const [MktCapFull, setMktCapFull] = useState('');
+  const [MktCapFF, setMktCapFF] = useState('');
   const location = useLocation();
   const { stock_id } = useParams();
 
@@ -206,6 +215,35 @@ const StockInfo = () => {
       fetchData();
     }
   }, [stockID, time]);
+
+  // This is used to get the data about the stock company over all perfimance in the market like the turn over, market capital and other values
+  useEffect(() => {
+    const fetchData = async() => {
+      try{
+        const result = await axios.get("http://localhost:3000/api/v1/stock/info/stockTrading", {
+          params: {
+            scripcode: stockID
+          }
+        })
+          console.log(result.data)
+        setWAP(result.data.WAP);
+      setTurnover(result.data.Turnover);
+      setTurnoverIn(result.data.Turnoverin);
+      setTTQ(result.data.TTQ);
+      setTTQin(result.data.TTQin);
+      setTwoWkAvgQty(result.data.TwoWkAvgQty);
+      setCktLimit(result.data.CktLimit);
+      setMktCapFull(result.data.MktCapFull);
+      setMktCapFF(result.data.MktCapFF);
+      }catch(error) {
+        console.log("Error while fetching the data in stockInfo.jsx, Error message: ", error)
+      }
+    }
+
+    if(stockID){
+      fetchData();
+    }
+  }, [stockID])
   return (
     <>
       <Header />
@@ -263,17 +301,24 @@ const StockInfo = () => {
               >
                 1D
               </span>
-              <span 
-              className={time === "5d" ? "active" : ""}
-              onClick={() => handleTimeClick('5d')}
-              >1W</span>
-              <span 
-              className={time === "6M" ? "active" : ""}
-              onClick={() => handleTimeClick('6M')}
-              >6M</span>
-              <span 
-              className={time === "1Y" ? "active" : ""}
-              onClick={() => handleTimeClick('12M')}>1Y</span>
+              <span
+                className={time === "5d" ? "active" : ""}
+                onClick={() => handleTimeClick("5d")}
+              >
+                1W
+              </span>
+              <span
+                className={time === "6M" ? "active" : ""}
+                onClick={() => handleTimeClick("6M")}
+              >
+                6M
+              </span>
+              <span
+                className={time === "1Y" ? "active" : ""}
+                onClick={() => handleTimeClick("12M")}
+              >
+                1Y
+              </span>
             </div>
           </div>
           <div className="stock-info-button-for-graph"></div>
@@ -351,7 +396,40 @@ const StockInfo = () => {
         </div>
 
         <div className="stock-info-by-script">
-          <div className="stock-by-script">Script data</div>
+          <div className="stock-by-data">
+            <div className="stock-card">
+              <div className="stock-row">
+                <span className="stock-label">WAP:</span>
+                <span className="stock-value">{WAP}</span>
+              </div>
+              <div className="stock-row">
+                <span className="stock-label">Turnover:</span>
+                <span className="stock-value">{Turnover}{TurnoverIn}</span>
+              </div>
+              <div className="stock-row">
+                <span className="stock-label">TTQ</span>
+                <span className="stock-value">{TTQ}{TTQin}</span>
+              </div>
+              <div className="stock-row">
+                <span className="stock-label">Two Wk Avg Qty (Lakh):</span>
+                <span className="stock-value">{TwoWkAvgQty}</span>
+              </div>
+              <div className="stock-row">
+                <span className="stock-label">Circuit Limit:</span>
+                <span className="stock-value">{CktLimit}</span>
+              </div>
+              <div className="stock-row">
+                <span className="stock-label">Market Cap Full:</span>
+                <span className="stock-value">{MktCapFull}</span>
+              </div>
+              <div className="stock-row">
+                <span className="stock-label">Market Cap Free Float:</span>
+                <span className="stock-value">{MktCapFF}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="stock-by-script"></div>
         </div>
       </div>
     </>
