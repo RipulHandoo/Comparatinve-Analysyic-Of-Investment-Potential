@@ -31,7 +31,6 @@ const StockInfo = () => {
   const [Index, setIndex] = useState("");
   const [Industry, setIndustry] = useState("");
   const [FaceShow, setFaceShow] = useState("");
-  const [MarketCap, setMarketCap] = useState("");
   const [upperLimit, setUpperLimit] = useState("");
   const [lowerLimit, setLowerLimit] = useState("");
   const [time, setTime] = useState("5d");
@@ -46,13 +45,12 @@ const StockInfo = () => {
   const [CktLimit, setCktLimit] = useState('');
   const [MktCapFull, setMktCapFull] = useState('');
   const [MktCapFF, setMktCapFF] = useState('');
+  const [stock_short_name, setStock_short_name] = useState('');
   const location = useLocation();
   const { stock_id } = useParams();
 
   const handleTimeClick = (event) => {
     setTime(event);
-    // setStockData([])
-    // console.log(time)
   };
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -94,7 +92,7 @@ const StockInfo = () => {
             },
           }
         );
-        console.log(result.data);
+        console.log("Stock security ID: ",result.data);
         // Here when we get the data we will update the values
         if (result.data !== null) {
           setEPS(result.data.EPS);
@@ -106,6 +104,7 @@ const StockInfo = () => {
           setFaceShow(result.data.IShow);
           setSector(result.data.Sector);
           setPB(result.data.PB);
+          setStock_short_name(result.data.SecurityId)
           setPE(result.data.PE);
         }
       } catch (error) {
@@ -244,6 +243,29 @@ const StockInfo = () => {
       fetchData();
     }
   }, [stockID])
+
+  // This effect will be used to call two scripts one which will fetch the data and store it and other will run the script and get the data
+
+  // UseEffect number 7
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log(stock_short_name)
+      try{
+        const fetchData = await axios.get("http://localhost:3000/api/v1/stock/info/download/dataset", {
+          params: {
+            scripcode: `${stock_short_name}.BSE`,
+          }
+        });
+        // now check if the fetchData has a status code 200 then run the script
+        console.log(fetchData);
+      }catch(error){
+        console.log("Error while fetching the data for the stock. Getting the data about the stock -> dataset. Error in UseEffect number: 7. Error Message: ", error)
+      }
+    }
+    if(stockID){
+      fetchData();
+    }
+  }, [stock_short_name])
   return (
     <>
       <Header />
