@@ -46,6 +46,8 @@ const StockInfo = () => {
   const [MktCapFull, setMktCapFull] = useState('');
   const [MktCapFF, setMktCapFF] = useState('');
   const [stock_short_name, setStock_short_name] = useState('');
+  const [loading, setLoading ] = useState(true);
+  const [scriptData, setScriptData] = useState("");
   const location = useLocation();
   const { stock_id } = useParams();
 
@@ -257,7 +259,11 @@ const StockInfo = () => {
           }
         });
         // now check if the fetchData has a status code 200 then run the script
-        console.log(fetchData);
+        if(fetchData != null){
+          setLoading(false);
+        }
+        setScriptData(fetchData.data.test_rmse);
+        console.log(fetchData.data);
       }catch(error){
         console.log("Error while fetching the data for the stock. Getting the data about the stock -> dataset. Error in UseEffect number: 7. Error Message: ", error)
       }
@@ -451,7 +457,17 @@ const StockInfo = () => {
             </div>
           </div>
 
-          <div className="stock-by-script"></div>
+          <div className="stock-by-script">
+            {
+              loading ? (
+                <div className="loading-indicator">Loading...</div>
+              ) : (
+                <div className="script-data">
+                  {scriptData}
+                </div>
+              )
+            }
+          </div>
         </div>
       </div>
     </>
