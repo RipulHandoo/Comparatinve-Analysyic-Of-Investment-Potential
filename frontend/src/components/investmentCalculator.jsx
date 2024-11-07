@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import "./InvestmentCalculator.css";
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -19,7 +19,7 @@ const InvestmentCalculator = () => {
 
   const handleCalculate = async () => {
     try {
-      const response = await fetch("your-backend-endpoint", {
+      const response = await fetch("http://localhost:3000/api/v1/mutual-fund-investment-calculator", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -30,17 +30,18 @@ const InvestmentCalculator = () => {
         }),
       });
       const data = await response.json();
-      setAllocation(data.allocation); // Set the allocation from server response
+      console.log(data);
+      setAllocation(data.investments); // Set the allocation from server response
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  useEffect(() => {
-    if (totalInvestment && expectedReturn && timeSpan) {
-      handleCalculate(); // Trigger calculation once inputs are provided
-    }
-  }, [totalInvestment, expectedReturn, timeSpan]);
+  // useEffect(() => {
+  //   if (totalInvestment && expectedReturn && timeSpan) {
+  //     handleCalculate(); // Trigger calculation once inputs are provided
+  //   }
+  // }, [totalInvestment, expectedReturn, timeSpan]);
 
   const chartData = {
     labels: ["Large Cap", "Mid Cap", "Small Cap"],
@@ -111,6 +112,10 @@ const InvestmentCalculator = () => {
                 handleInputChange(setTimeSpan)(e);
               }}
             />
+          </div>
+
+          <div className="total-investment">
+            <button onClick={ handleCalculate }>Submit</button>
           </div>
         </div>
 
