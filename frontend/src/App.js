@@ -7,6 +7,8 @@ import Stocks from './components/stocks';
 import MutualFund from './components/mutualFund';
 import Market from './components/market';
 import StockInfo from './components/stockInfo';
+import LargeCapMF from './components/largeCapMF';
+import InvestmentCalculator from './components/investmentCalculator';
 
 function App() {
   return (
@@ -21,6 +23,10 @@ function App() {
       <Route path='/mutual-fund' element = { < MutualFund /> }></Route>
       {/* <Route path='/stock/:stock-name/:stock-id' element= { < StockInfo />}></Route> */}
       <Route path='/stock/:stock_id' element= { < StockInfo />}></Route>
+      <Route path='/mutual-fund/large-cap' element= { < LargeCapMF />}></Route>
+
+      {/* Route for the diversification page */}
+      <Route path='/mf-investment-calculator' element= { < InvestmentCalculator />}></Route>
     </Routes>
     </BrowserRouter>
   );

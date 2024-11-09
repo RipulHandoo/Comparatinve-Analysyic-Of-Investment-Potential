@@ -10,7 +10,7 @@ function Home() {
     }
 
     const handleMF = () => {
-        navigate("mf");
+        navigate("/mutual-fund");
     }
 
     const handleIPO = () => {
@@ -56,10 +56,10 @@ function Home() {
                         <h1>IPO</h1>
                         <button onClick={handleIPO}>Explore Now</button>
                     </div>
-                    <div>
+                    {/* <div>
                         <h1>Futures & Options</h1>
                         <button onClick={handleFO}>Explore Now</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>
