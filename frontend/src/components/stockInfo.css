@@ -37,7 +37,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: pink;
     width: 700px;
     height: 500px;
   }
@@ -165,3 +164,44 @@
     background-color: #f8f9fa;
     border-radius: 10px;
 }
+
+
+.stock-by-script {
+    background-color: #f9f9f9; /* light background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* subtle shadow */
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+    /* here give a decent font family which is good for market and that displays positive attraction*/
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .loading-indicator {
+    /* font-size: 1.2rem; */
+    color: #6c757d;
+    text-align: center;
+    padding: 10px;
+    animation: pulse 1.5s infinite; /* subtle loading animation */
+  }
+  
+  .script-data {
+    /* font-size: 1.4rem; */
+    color: #343a40;
+    text-align: justify;
+    padding: 15px 0;
+  }
+  
+  .script-data p {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  /* Animation for loading */
+  @keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+  }
+  

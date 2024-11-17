@@ -182,6 +182,7 @@ const StockInfo = () => {
     }
 
     // TODO: Update this so we can get the current value frequently
+    // TODO: Here instead of call the api again and again is not a optimal approach, we should use the websockets to get the data. But the server is not supporting the websockets. So we have to use the setInterval to get the data.
     // Fetch data every 10 seconds
     // const intervalId = setInterval(fetchData, 10000);
 
@@ -262,7 +263,9 @@ const StockInfo = () => {
         if(fetchData != null){
           setLoading(false);
         }
-        setScriptData(fetchData.data.test_rmse);
+
+        // here in ScriptData we are only instered showing 2 digits after the decimal point
+        setScriptData(fetchData.data.skyrocket_probability.toFixed(2));
         console.log(fetchData.data);
       }catch(error){
         console.log("Error while fetching the data for the stock. Getting the data about the stock -> dataset. Error in UseEffect number: 7. Error Message: ", error)
@@ -320,8 +323,6 @@ const StockInfo = () => {
               </LineChart>
             </ResponsiveContainer>
 
-            {/* Additional buttons or elements */}
-
             <div className="timeline-button">
               <span
                 className={time === "0" ? "active" : ""}
@@ -342,7 +343,7 @@ const StockInfo = () => {
                 6M
               </span>
               <span
-                className={time === "1Y" ? "active" : ""}
+                className={time === "12M" ? "active" : ""}
                 onClick={() => handleTimeClick("12M")}
               >
                 1Y
@@ -463,7 +464,8 @@ const StockInfo = () => {
                 <div className="loading-indicator">Loading...</div>
               ) : (
                 <div className="script-data">
-                  {scriptData}
+                  {/* Here i have to give the details percentage wether the stock will go up or not */}
+                  <p>Stock will go up by {scriptData}% in the next day</p>
                 </div>
               )
             }

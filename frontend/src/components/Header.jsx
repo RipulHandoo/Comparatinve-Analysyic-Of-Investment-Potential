@@ -12,7 +12,9 @@ const Header = () => {
       <div className='header-logo'>
         {/* Store the logo */}
         <a href="/">
-        <img src="https://logowik.com/content/uploads/images/zerodha6662.jpg" alt="site logo" />
+        {/* <img src="https://logowik.com/content/uploads/images/zerodha6662.jpg" alt="site logo" /> */}
+
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/007/371/777/small/trading-financial-logo-trading-icon-candlestick-trading-trading-stock-symbol-market-chart-sign-vector.jpg" alt="site logo" />
         </a>
       </div>
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import "./InvestmentCalculator.css";
+import { useNavigate } from "react-router-dom";
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from "react-chartjs-2";
 
@@ -11,8 +12,10 @@ const InvestmentCalculator = () => {
   const [expectedReturn, setExpectedReturn] = useState("");
   const [timeSpan, setTimeSpan] = useState("");
   const [riskTolerance, setRiskTolerance] = useState("");
-  const [allocation, setAllocation] = useState([33.3, 33.3, 33.3]); // Initial equal distribution
-  
+  const [allocation, setAllocation] = useState([33.3, 33.3, 33.3]);
+  const [showAssetClasses, setShowAssetClasses] = useState(false); // New state
+  const navigate = useNavigate();
+
   const handleInputChange = (setter) => (e) => {
     setter(e.target.value);
   };
@@ -31,18 +34,27 @@ const InvestmentCalculator = () => {
       });
       const data = await response.json();
       console.log(data);
-      setAllocation(data.investments); // Set the allocation from server response
+      setAllocation(data.investments);
+      setShowAssetClasses(true); // Show asset classes section on submit
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  // useEffect(() => {
-  //   if (totalInvestment && expectedReturn && timeSpan) {
-  //     handleCalculate(); // Trigger calculation once inputs are provided
-  //   }
-  // }, [totalInvestment, expectedReturn, timeSpan]);
+  const handleLargeCap = () => {
+    // Navigate to the large cap mutual funds page
+    navigate("/mutual-fund/large-cap");
+  };
 
+  const handleMidCap = () => {
+    // Navigate to the mid cap mutual funds page
+    navigate("/mutual-fund/mid-cap");
+  };
+
+  const handleSmallCap = () => {
+    // Navigate to the small cap mutual funds page
+    navigate("/mutual-fund/small-cap"); 
+  };
   const chartData = {
     labels: ["Large Cap", "Mid Cap", "Small Cap"],
     datasets: [
@@ -57,10 +69,11 @@ const InvestmentCalculator = () => {
   return (
     <>
       <Header />
-      <h1 style={{ marginLeft: "30px", marginTop: "100px", fontFamily: "Italic", fontWeight: "bold", fontSize: "26px" }}>Mutual Fund Investment</h1>
+      <h1 className="investment-title">Mutual Fund Investment</h1>
 
       <div className="investment-container">
         <div className="investment-input-section">
+          {/* Investment input fields */}
           <div className="total-investment">
             <p>Total Investment</p>
             <input
@@ -70,7 +83,6 @@ const InvestmentCalculator = () => {
               onChange={handleInputChange(setTotalInvestment)}
             />
           </div>
-
           <div className="total-investment">
             <p>Expected Return</p>
             <input
@@ -87,7 +99,6 @@ const InvestmentCalculator = () => {
               }}
             />
           </div>
-
           <div className="total-investment">
             <p>Risk Tolerance</p>
             <input
@@ -97,7 +108,6 @@ const InvestmentCalculator = () => {
               onChange={handleInputChange(setRiskTolerance)}
             />
           </div>
-
           <div className="total-investment">
             <p>Time Span</p>
             <input
@@ -113,7 +123,6 @@ const InvestmentCalculator = () => {
               }}
             />
           </div>
-
           <div className="total-investment">
             <button onClick={ handleCalculate }>Submit</button>
           </div>
@@ -123,6 +132,24 @@ const InvestmentCalculator = () => {
           <Doughnut data={chartData} options={{ responsive: true }} />
         </div>
       </div>
+
+      {/* Conditional rendering for asset class cards */}
+      {showAssetClasses && (
+        <div className="asset-class-container">
+          <div className="asset-class-card">
+            <h1>Large Cap</h1>
+            <button onClick={ handleLargeCap}>Explore Now</button>
+          </div>
+          <div className="asset-class-card">
+            <h1>Mid Cap</h1>
+            <button onClick={ handleMidCap}>Explore Now</button>
+          </div>
+          <div className="asset-class-card">
+            <h1>Small Cap</h1>
+            <button onClick={ handleSmallCap}>Explore Now</button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

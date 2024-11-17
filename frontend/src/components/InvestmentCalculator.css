@@ -110,3 +110,52 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+
+/* Asset class cards section */
+.asset-class-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 900px;
+  }
+  
+  .asset-class-card {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .asset-class-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .asset-class-card h1 {
+    font-size: 22px;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+  }
+  
+  .asset-class-card button {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #1cc88a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .asset-class-card button:hover {
+    background-color: #17a673;
+  }
+  

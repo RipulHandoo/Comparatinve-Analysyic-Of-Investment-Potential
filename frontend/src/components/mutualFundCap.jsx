@@ -64,7 +64,7 @@ const MutualFundCap = ({url, FundCategory}) => {
   
           <div className="mutual-fund-table">
             <div className="mutual-fund-table-header">
-              <div className="mutual-fund-table-header-company">COMPANY</div>
+              <div className="mutual-fund-table-header-company">Fund Name</div>
               <div className="mutual-fund-table-header-price">NAV</div>
             </div>
   
