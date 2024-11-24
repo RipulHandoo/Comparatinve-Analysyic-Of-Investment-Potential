@@ -36,10 +36,11 @@ const MutualFundCap = ({url, FundCategory}) => {
     }, []);
   
     const handleClick = (result) => {
+      console.log(result.scripcode);
       navigate(`/mutual-fund/${result.scripcode}`, {
         state: {
             // TODO: have to declare variables to store values of the sciprcode and other details to be send as parameter to next page. 
-          scripcode: result.scripecode,
+          stockID: result.scripecode,
           long_name: result.name,
         },
       });

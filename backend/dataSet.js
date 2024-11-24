@@ -6,26 +6,30 @@ const yahooFinance = require('yahoo-finance2').default;
 
 // Array of stock data
 const stockData = [
+    // {
+    //     "name": "Tata Motors",
+    //     "symbol" :"TATAMOTORS.BSE"
+    // }
     {
         "name": "ITC Limited",
         "symbol": "ITC.NS",
     },
-    {
-        "name": "Wipro Limited",
-        "symbol": "WIPRO.NS",
-    },
-    {
-        "name": "Reliance Industries Limited",
-        "symbol": "RELIANCE.NS",
-    },
-    {
-        "name": "Maruti",
-        "symbol": "MARUTI.NS",
-    },
-    {
-        "name": "TCS",
-        "symbol": "TCS.NS",
-    }
+    // {
+    //     "name": "Wipro Limited",
+    //     "symbol": "WIPRO.NS",
+    // },
+    // {
+    //     "name": "Reliance Industries Limited",
+    //     "symbol": "RELIANCE.NS",
+    // },
+    // {
+    //     "name": "Maruti",
+    //     "symbol": "MARUTI.NS",
+    // },
+    // {
+    //     "name": "TCS",
+    //     "symbol": "TCS.NS",
+    // }
 ];
 
 // Function to iterate thorugh each of the stock and store the data in the local file system
@@ -48,7 +52,7 @@ const stockData = [
 
 async function jsonToCSV(query){
     // get the data from yahoo site in the json
-    const queryOptions = { period1: '2020-01-01', period2: '2024-07-16', interval: '1d' };
+    const queryOptions = { period1: '2020-01-01', period2: '2024-07-16', interval: '1mo' };
     const jsonData = await yahooFinance.historical(query, queryOptions);
 
     // convert that json data into csv

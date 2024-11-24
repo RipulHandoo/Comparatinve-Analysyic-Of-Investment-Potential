@@ -14,11 +14,10 @@ const MutualFund = () => {
     first_div_header2 : "Get detailed info" ,
 
     // TODO: This should point to some other url
-    link : "market" 
+    link : "mutual-fund-market" 
   }
   return (
     <>
-       {/* <Stocks { ...data} /> */}
 
        <Asset {... data} />
     </>
